@@ -10,14 +10,14 @@ let messageInstance;
 let key = 1;
 
 const iconTypes = {
-    'info': 'information-circled',
-    'success': 'checkmark-circled',
-    'warning': 'android-alert',
-    'error': 'close-circled',
+    'info': 'ion-close-round',
+    'success': 'ion-close-round',
+    'warning': 'ion-close-round',
+    'error': 'ion-close-round',
     'loading': 'load-c'
 };
 
-function getMessageInstance () {
+function getMessageInstance() {
     messageInstance = messageInstance || Notification.newInstance({
         prefixCls: prefixCls,
         style: {
@@ -28,9 +28,9 @@ function getMessageInstance () {
     return messageInstance;
 }
 
-function notice (content, duration = defaultDuration, type, onClose) {
+function notice(content, duration = defaultDuration, type, onClose) {
     if (!onClose) {
-        onClose = function () {
+        onClose = function() {
 
         }
     }
@@ -48,40 +48,40 @@ function notice (content, duration = defaultDuration, type, onClose) {
         transitionName: 'move-up',
         content: `
             <div class="${prefixCls}-custom-content ${prefixCls}-${type}">
-                <i class="${iconPrefixCls} ${iconPrefixCls}-${iconType}${loadCls}"></i>
                 <span>${content}</span>
+                <i class="${iconPrefixCls} ${iconPrefixCls}-${iconType}${loadCls}"></i>
             </div>
         `,
         onClose: onClose
     });
 
     // 用于手动消除
-    return (function () {
+    return (function() {
         let target = key++;
 
-        return function () {
+        return function() {
             instance.remove(`${prefixKey}${target}`);
         }
     })();
 }
 
 export default {
-    info (content, duration, onClose) {
+    info(content, duration, onClose) {
         return notice(content, duration, 'info', onClose);
     },
-    success (content, duration, onClose) {
+    success(content, duration, onClose) {
         return notice(content, duration, 'success', onClose);
     },
-    warning (content, duration, onClose) {
+    warning(content, duration, onClose) {
         return notice(content, duration, 'warning', onClose);
     },
-    error (content, duration, onClose) {
+    error(content, duration, onClose) {
         return notice(content, duration, 'error', onClose);
     },
-    loading (content, duration, onClose) {
+    loading(content, duration, onClose) {
         return notice(content, duration, 'loading', onClose);
     },
-    config (options) {
+    config(options) {
         if (options.top) {
             top = options.top;
         }
@@ -89,7 +89,7 @@ export default {
             defaultDuration = options.duration;
         }
     },
-    destroy () {
+    destroy() {
         let instance = getMessageInstance();
         messageInstance = null;
         instance.destroy();

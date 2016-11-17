@@ -3,11 +3,12 @@
 @css-prefix-iconfont    : ivu-icon;
 
 // Color
-@primary-color          : #3399ff;
+@primary-color          : #3890ff;
 @info-color             : #2db7f5;
-@success-color          : #00cc66;
-@warning-color          : #ff9900;
-@error-color            : #ff5500;
+@success-color          : #22c36a;
+@warning-color          : #f7b32b;
+@error-color            : #f1483f;
+@orange-color           : #f56e25;
 @link-color             : #3399ff;
 @link-hover-color       : tint(@link-color, 20%);
 @link-active-color      : shade(@link-color, 5%);
@@ -23,7 +24,7 @@
 @text-color             : #657180;
 @font-size-base         : 14px;
 @font-size-small        : 12px;
-@line-height-base       : 1.5;
+@line-height-base       : 1;
 @line-height-computed   : floor((@font-size-base * @line-height-base));
 @border-radius-base     : 6px;
 @border-radius-small    : 4px;
@@ -48,19 +49,19 @@
 @shadow-right           : 1px 0 6px @shadow-color;
 
 // Button
-@btn-font-weight        : normal;
-@btn-padding-base       : 6px 15px;
-@btn-padding-large      : 6px 15px 7px 15px;
+@btn-font-weight        : 400;
+@btn-padding-base       : 8px 17px;
+@btn-padding-large      : 8px 17px 9px 17px;
 @btn-padding-small      : 2px 7px;
-@btn-font-size          : 12px;
-@btn-font-size-large    : 14px;
+@btn-font-size          : 14px;
+@btn-font-size-large    : 16px;
 @btn-border-radius      : 4px;
 @btn-border-radius-small: 3px;
 @btn-group-border       : shade(@primary-color, 5%);
 
-@btn-disable-color      : #c3cbd6;
-@btn-disable-bg         : @background-color-base;
-@btn-disable-border     : @border-color-base;
+@btn-disable-color      : #ccd1d9;
+@btn-disable-bg         : transparent;
+@btn-disable-border     : #ccd1d9;
 
 @btn-default-color      : @text-color;
 @btn-default-bg         : @background-color-base;
@@ -69,9 +70,29 @@
 @btn-primary-color      : #fff;
 @btn-primary-bg         : @primary-color;
 
-@btn-ghost-color        : @text-color;
+@btn-blue-color         : #fff;
+@btn-blue-bg            : @primary-color;
+@btn-blue-border        : #217ef2;
+
+@btn-red-color          : #fff;
+@btn-red-bg             : @error-color;
+@btn-red-border         : #e1342b;
+
+@btn-yellow-color       : #fff;
+@btn-yellow-bg          : @warning-color;
+@btn-yellow-border      : #e7a217;
+
+@btn-green-color        : #fff;
+@btn-green-bg           : @success-color;
+@btn-green-border       : #279a5b;
+
+@btn-orange-color       : #fff;
+@btn-orange-bg          : @orange-color;
+@btn-orange-border      : #de5e18;
+
+@btn-ghost-color        : #3d444f;
 @btn-ghost-bg           : transparent;
-@btn-ghost-border       : @border-color-base;
+@btn-ghost-border       : #ccd1d9;
 
 @btn-circle-size        : 32px;
 @btn-circle-size-large  : 36px;

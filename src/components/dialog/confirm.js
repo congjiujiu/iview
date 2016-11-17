@@ -19,15 +19,15 @@ Modal.newInstance = properties => {
         <Modal${props} :visible.sync="visible" :width="width">
             <div class="${prefixCls}">
                 <div class="${prefixCls}-head">
-                    <div :class="iconTypeCls"><i :class="iconNameCls"></i></div>
                     <div class="${prefixCls}-head-title">{{{ title }}}</div>
+                    <div :class="iconTypeCls" @click="cancel"><i :class="iconNameCls"></i></div>
                 </div>
                 <div class="${prefixCls}-body">
                     {{{ body }}}
                 </div>
                 <div class="${prefixCls}-footer">
-                    <i-button type="ghost" size="large" v-if="showCancel" @click="cancel">{{ cancelText }}</i-button>
-                    <i-button type="primary" size="large" :loading="buttonLoading" @click="ok">{{ okText }}</i-button>
+                    <i-button type="ghost" v-if="showCancel" @click="cancel">{{ cancelText }}</i-button>
+                    <i-button type="blue" :loading="buttonLoading" @click="ok">{{ okText }}</i-button>
                 </div>
             </div>
         </Modal>
@@ -46,18 +46,18 @@ Modal.newInstance = properties => {
             iconName: '',
             okText: '确定',
             cancelText: '取消',
-            showCancel: false,
+            showCancel: true,
             loading: false,
             buttonLoading: false
         }),
         computed: {
-            iconTypeCls () {
+            iconTypeCls() {
                 return [
                     `${prefixCls}-head-icon`,
                     `${prefixCls}-head-icon-${this.iconType}`
                 ]
             },
-            iconNameCls () {
+            iconNameCls() {
                 return [
                     'ivu-icon',
                     `ivu-icon-${this.iconName}`
@@ -65,13 +65,13 @@ Modal.newInstance = properties => {
             }
         },
         methods: {
-            cancel () {
+            cancel() {
                 this.visible = false;
                 this.buttonLoading = false;
                 this.onCancel();
                 this.remove();
             },
-            ok () {
+            ok() {
                 if (this.loading) {
                     this.buttonLoading = true;
                 } else {
@@ -80,36 +80,36 @@ Modal.newInstance = properties => {
                 }
                 this.onOk();
             },
-            remove () {
+            remove() {
                 setTimeout(() => {
                     this.destroy();
                 }, 300);
             },
-            destroy () {
+            destroy() {
                 this.$destroy();
                 document.body.removeChild(div);
                 this.onRemove();
             },
-            onOk () {},
-            onCancel () {},
-            onRemove () {}
+            onOk() {},
+            onCancel() {},
+            onRemove() {}
         }
     }).$children[0];
 
     return {
-        show (props) {
+        show(props) {
             modal.$parent.showCancel = props.showCancel;
             modal.$parent.iconType = props.icon;
 
             switch (props.icon) {
                 case 'info':
-                    modal.$parent.iconName = 'information-circled';
+                    modal.$parent.iconName = 'close-circled';
                     break;
                 case 'success':
-                    modal.$parent.iconName = 'checkmark-circled';
+                    modal.$parent.iconName = 'close-circled';
                     break;
                 case 'warning':
-                    modal.$parent.iconName = 'android-alert';
+                    modal.$parent.iconName = 'close-circled';
                     break;
                 case 'error':
                     modal.$parent.iconName = 'close-circled';
@@ -157,7 +157,7 @@ Modal.newInstance = properties => {
 
             modal.visible = true;
         },
-        remove () {
+        remove() {
             modal.visible = false;
             modal.$parent.buttonLoading = false;
             modal.$parent.remove();

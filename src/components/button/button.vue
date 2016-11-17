@@ -7,26 +7,30 @@
 </template>
 <script>
     import Icon from '../icon';
-    import { oneOf } from '../../utils/assist';
+    import {
+        oneOf
+    } from '../../utils/assist';
 
     const prefixCls = 'ivu-btn';
     const iconPrefixCls = 'ivu-icon';
 
     export default {
-        components: { Icon },
+        components: {
+            Icon
+        },
         props: {
             type: {
-                validator (value) {
-                    return oneOf(value, ['primary', 'ghost', 'dashed', 'text']);
+                validator(value) {
+                    return oneOf(value, ['primary', 'ghost', 'dashed', 'text', 'blue', 'red', 'yellow', 'green', 'orange']);
                 }
             },
             shape: {
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['circle', 'circle-outline']);
                 }
             },
             size: {
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['small', 'large']);
                 }
             },
@@ -34,22 +38,21 @@
             disabled: Boolean,
             htmlType: {
                 default: 'button',
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['button', 'submit', 'reset']);
                 }
             },
             icon: String
         },
-        data () {
+        data() {
             return {
                 showSlot: true
             }
         },
         computed: {
-            classes () {
+            classes() {
                 return [
-                    `${prefixCls}`,
-                    {
+                    `${prefixCls}`, {
                         [`${prefixCls}-${this.type}`]: !!this.type,
                         [`${prefixCls}-${this.shape}`]: !!this.shape,
                         [`${prefixCls}-${this.size}`]: !!this.size,
@@ -58,19 +61,18 @@
                     }
                 ]
             },
-            loadingIconClasses () {
+            loadingIconClasses() {
                 return `${iconPrefixCls} ivu-load-loop ${iconPrefixCls}-load-c`;
             },
-            typeIconClasses () {
+            typeIconClasses() {
                 return [
-                    `${iconPrefixCls}`,
-                    {
+                    `${iconPrefixCls}`, {
                         [`${iconPrefixCls}-${this.icon}`]: !!this.icon
                     }
                 ]
             }
         },
-        ready () {
+        ready() {
             this.showSlot = this.$els.slot.innerHTML !== '';
         }
     }

@@ -19,8 +19,8 @@ Modal.newInstance = properties => {
         <Modal${props} :visible.sync="visible" :width="width">
             <div class="${prefixCls}">
                 <div class="${prefixCls}-head">
-                    <div :class="iconTypeCls"><i :class="iconNameCls"></i></div>
                     <div class="${prefixCls}-head-title">{{{ title }}}</div>
+                    <div :class="iconTypeCls"><i :class="iconNameCls"></i></div>
                 </div>
                 <div class="${prefixCls}-body">
                     {{{ body }}}
@@ -51,13 +51,13 @@ Modal.newInstance = properties => {
             buttonLoading: false
         }),
         computed: {
-            iconTypeCls () {
+            iconTypeCls() {
                 return [
                     `${prefixCls}-head-icon`,
                     `${prefixCls}-head-icon-${this.iconType}`
                 ]
             },
-            iconNameCls () {
+            iconNameCls() {
                 return [
                     'ivu-icon',
                     `ivu-icon-${this.iconName}`
@@ -65,13 +65,13 @@ Modal.newInstance = properties => {
             }
         },
         methods: {
-            cancel () {
+            cancel() {
                 this.visible = false;
                 this.buttonLoading = false;
                 this.onCancel();
                 this.remove();
             },
-            ok () {
+            ok() {
                 if (this.loading) {
                     this.buttonLoading = true;
                 } else {
@@ -80,39 +80,39 @@ Modal.newInstance = properties => {
                 }
                 this.onOk();
             },
-            remove () {
+            remove() {
                 setTimeout(() => {
                     this.destroy();
                 }, 300);
             },
-            destroy () {
+            destroy() {
                 this.$destroy();
                 document.body.removeChild(div);
                 this.onRemove();
             },
-            onOk () {},
-            onCancel () {},
-            onRemove () {}
+            onOk() {},
+            onCancel() {},
+            onRemove() {}
         }
     }).$children[0];
 
     return {
-        show (props) {
+        show(props) {
             modal.$parent.showCancel = props.showCancel;
             modal.$parent.iconType = props.icon;
 
             switch (props.icon) {
                 case 'info':
-                    modal.$parent.iconName = 'information-circled';
+                    modal.$parent.iconName = 'ion-close-round';
                     break;
                 case 'success':
-                    modal.$parent.iconName = 'checkmark-circled';
+                    modal.$parent.iconName = 'ion-close-round';
                     break;
                 case 'warning':
-                    modal.$parent.iconName = 'android-alert';
+                    modal.$parent.iconName = 'ion-close-round';
                     break;
                 case 'error':
-                    modal.$parent.iconName = 'close-circled';
+                    modal.$parent.iconName = 'ion-close-round';
                     break;
                 case 'confirm':
                     modal.$parent.iconName = 'help-circled';
@@ -157,7 +157,7 @@ Modal.newInstance = properties => {
 
             modal.visible = true;
         },
-        remove () {
+        remove() {
             modal.visible = false;
             modal.$parent.buttonLoading = false;
             modal.$parent.remove();

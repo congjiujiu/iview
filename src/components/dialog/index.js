@@ -2,7 +2,7 @@ import Modal from './confirm';
 
 let modalInstance;
 
-function getModalInstance () {
+function getModalInstance() {
     modalInstance = modalInstance || Modal.newInstance({
         closable: false,
         maskClosable: false,
@@ -12,10 +12,10 @@ function getModalInstance () {
     return modalInstance;
 }
 
-function confirm (options) {
-    let instance  = getModalInstance();
+function confirm(options) {
+    let instance = getModalInstance();
 
-    options.onRemove = function () {
+    options.onRemove = function() {
         modalInstance = null;
     };
 
@@ -23,33 +23,33 @@ function confirm (options) {
 }
 
 export default {
-    info (props = {}) {
+    info(props = {}) {
         props.icon = 'info';
-        props.showCancel = false;
+        props.showCancel = true;
         return confirm(props);
     },
-    success (props = {}) {
+    success(props = {}) {
         props.icon = 'success';
-        props.showCancel = false;
+        props.showCancel = true;
         return confirm(props);
     },
-    warning (props = {}) {
+    warning(props = {}) {
         props.icon = 'warning';
-        props.showCancel = false;
+        props.showCancel = true;
         return confirm(props);
     },
-    error (props = {}) {
+    error(props = {}) {
         props.icon = 'error';
         props.showCancel = false;
         return confirm(props);
     },
-    confirm (props = {}) {
+    confirm(props = {}) {
         props.icon = 'confirm';
         props.showCancel = true;
         return confirm(props);
     },
-    remove () {
-        if (!modalInstance) {   // at loading status, remove after Cancel
+    remove() {
+        if (!modalInstance) { // at loading status, remove after Cancel
             return false;
         }
 

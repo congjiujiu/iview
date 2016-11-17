@@ -11,10 +11,10 @@
             color: String
         },
         computed: {
-            classes () {
+            classes() {
                 return `${prefixCls} ${prefixCls}-${this.type}`
             },
-            styles () {
+            styles() {
                 let style = {};
 
                 if (!!this.size) {

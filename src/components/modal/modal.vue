@@ -12,8 +12,8 @@
                 <div :class="[prefixCls + '-body']"><slot></slot></div>
                 <div :class="[prefixCls + '-footer']" v-if="!footerHide">
                     <slot name="footer">
-                        <i-button type="ghost" size="large" @click="cancel">{{ cancelText }}</i-button>
-                        <i-button type="primary" size="large" :loading="buttonLoading" @click="ok">{{ okText }}</i-button>
+                        <i-button type="ghost" @click="cancel">{{ cancelText }}</i-button>
+                        <i-button type="blue" :loading="buttonLoading" @click="ok">{{ okText }}</i-button>
                     </slot>
                 </div>
             </div>
@@ -23,12 +23,17 @@
 <script>
     import Icon from '../icon';
     import iButton from '../button/button.vue';
-    import { getScrollBarSize } from '../../utils/assist';
+    import {
+        getScrollBarSize
+    } from '../../utils/assist';
 
     const prefixCls = 'ivu-modal';
 
     export default {
-        components: { Icon, iButton },
+        components: {
+            Icon,
+            iButton
+        },
         props: {
             visible: {
                 type: Boolean,
@@ -73,7 +78,7 @@
                 default: false
             }
         },
-        data () {
+        data() {
             return {
                 prefixCls: prefixCls,
                 wrapShow: false,
@@ -82,22 +87,21 @@
             }
         },
         computed: {
-            wrapClasses () {
+            wrapClasses() {
                 return [
-                    `${prefixCls}-wrap`,
-                    {
+                    `${prefixCls}-wrap`, {
                         [`${prefixCls}-hidden`]: !this.wrapShow,
                         [`${this.className}`]: !!this.className
                     }
                 ]
             },
-            maskClasses () {
+            maskClasses() {
                 return `${prefixCls}-mask`;
             },
-            classes () {
+            classes() {
                 return `${prefixCls}`;
             },
-            styles () {
+            styles() {
                 let style = {};
 
                 const styleWidth = {
@@ -112,19 +116,19 @@
             }
         },
         methods: {
-            close () {
+            close() {
                 this.visible = false;
                 this.$emit('on-cancel');
             },
-            mask () {
+            mask() {
                 if (this.maskClosable) {
                     this.close();
                 }
             },
-            cancel () {
+            cancel() {
                 this.close();
             },
-            ok () {
+            ok() {
                 if (this.loading) {
                     this.buttonLoading = true;
                 } else {
@@ -132,14 +136,14 @@
                 }
                 this.$emit('on-ok');
             },
-            EscClose (e) {
+            EscClose(e) {
                 if (this.visible && this.closable) {
                     if (e.keyCode === 27) {
                         this.close()
                     }
                 }
             },
-            checkScrollBar () {
+            checkScrollBar() {
                 let fullWindowWidth = window.innerWidth;
                 if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
                     const documentElementRect = document.documentElement.getBoundingClientRect();
@@ -150,15 +154,15 @@
                     this.scrollBarWidth = getScrollBarSize();
                 }
             },
-            setScrollBar () {
+            setScrollBar() {
                 if (this.bodyIsOverflowing && this.scrollBarWidth !== undefined) {
                     document.body.style.paddingRight = `${this.scrollBarWidth}px`;
                 }
             },
-            resetScrollBar () {
+            resetScrollBar() {
                 document.body.style.paddingRight = '';
             },
-            addScrollEffect () {
+            addScrollEffect() {
                 this.checkScrollBar();
                 this.setScrollBar();
                 document.body.style.overflow = 'hidden';
@@ -168,7 +172,7 @@
                 this.resetScrollBar();
             }
         },
-        ready () {
+        ready() {
             if (this.visible) {
                 this.wrapShow = true;
             }
@@ -184,11 +188,11 @@
             // ESC close
             document.addEventListener('keydown', this.EscClose);
         },
-        beforeDestroy () {
+        beforeDestroy() {
             document.removeEventListener('keydown', this.EscClose);
         },
         watch: {
-            visible (val) {
+            visible(val) {
                 if (val === false) {
                     this.buttonLoading = false;
                     setTimeout(() => {
@@ -200,7 +204,7 @@
                     this.addScrollEffect();
                 }
             },
-            loading (val) {
+            loading(val) {
                 if (!val) {
                     this.buttonLoading = false;
                 }
