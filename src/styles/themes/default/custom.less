@@ -9,6 +9,8 @@
 @warning-color          : #f7b32b;
 @error-color            : #f1483f;
 @orange-color           : #f56e25;
+@grey-light             : #ccd1d9;
+@light-white            : #f5f7fa;
 @link-color             : #3399ff;
 @link-hover-color       : tint(@link-color, 20%);
 @link-active-color      : shade(@link-color, 5%);
@@ -26,8 +28,8 @@
 @font-size-small        : 12px;
 @line-height-base       : 1;
 @line-height-computed   : floor((@font-size-base * @line-height-base));
-@border-radius-base     : 6px;
-@border-radius-small    : 4px;
+@border-radius-base     : 2px;
+@border-radius-small    : 1px;
 @cursor-disabled        : not-allowed;
 
 // Border color
@@ -106,23 +108,24 @@
 @legend-color           : #999;
 
 // Input
+@input-width-base            : 287px;
 @input-height-base           : 32px;
 @input-height-large          : 36px;
 @input-height-small          : 24px;
 
-@input-padding-horizontal    : 7px;
-@input-padding-vertical-base : 4px;
+@input-padding-horizontal    : 10px;
+@input-padding-vertical-base : 0;
 @input-padding-vertical-small: 1px;
 @input-padding-vertical-large: 6px;
 
 @input-placeholder-color     : #ccc;
 @input-color                 : @text-color;
-@input-border-color          : @border-color-base;
+@input-border-color          : @grey-light;
 @input-bg                    : #fff;
 
 @input-hover-border-color    : @primary-color;
 @input-focus-border-color    : @primary-color;
-@input-disabled-bg           : #f3f3f3;
+@input-disabled-bg           : @light-white;
 
 // Tag
 @tag-font-size          : 12px;

@@ -1,20 +1,24 @@
 <template>
-    <i-input icon="ios-clock-outline" @on-focus="focus" @on-blur="blur" readonly style="width:200px;" :value.sync="v" @on-enter="enter" @on-click="iconclick" size="large" placeholder="请输入"></i-input>
-    <i-input icon="ios-clock-outline" style="width:200px;" :value.sync="v" @on-enter="enter" placeholder="请输入"></i-input>
-    <i-input icon="ios-clock-outline" style="width:200px;" :value.sync="v" @on-enter="enter" size="small" placeholder="请输入"></i-input>
+    <div style="margin: 10px 0"><i-input icon="ios-clock-outline" @on-focus="focus" @on-blur="blur" readonly :value.sync="v" @on-enter="enter" @on-click="iconclick" size="large" placeholder="请输入"></i-input></div>
+    <div style="margin: 10px 0"><i-input icon="ios-clock-outline" :value.sync="v" @on-enter="enter" placeholder="请输入"></i-input></div>
+    <div style="margin: 10px 0"><i-input icon="ios-clock-outline" :value.sync="v" @on-enter="enter" size="small" placeholder="请输入"></i-input></div>
     <br>
     <br>
-    <i-input style="width:200px;" :value.sync="v" @on-enter="enter" size="large" placeholder="请输入"></i-input>
-    <i-input style="width:200px;" :value.sync="v" @on-enter="enter" placeholder="请输入"></i-input>
-    <i-input style="width:200px;" :value.sync="v" @on-enter="enter" @on-change="change" size="small" placeholder="请输入"></i-input>
+    <div style="margin: 10px 0"><i-input :value.sync="v" @on-enter="enter" size="large" placeholder="请输入"></i-input></div>
+    <div style="margin: 10px 0"><i-input :value.sync="v" @on-enter="enter" placeholder="请输入"></i-input></div>
+    <div style="margin: 10px 0"><i-input :value.sync="v" @on-enter="enter" @on-change="change" size="small" placeholder="请输入"></i-input></div>
     {{ v }}
     <br>
     <br>
-    <i-input readonly placeholder="this is something" style="width:200px;" :value.sync="t" type="textarea" :autosize="autosize"></i-input>
+    <i-input readonly placeholder="this is something" :value.sync="t" type="textarea" :autosize="autosize"></i-input>
     {{ t }}
     <br>
     <br>
-    <div style="width: 400px">
+    <i-input disabled :value.sync="c" icon="locked" placeholder="disabled"></i-input>
+    <i-input type="search" icon="ios-search"></i-input>
+    <br>
+    <br>
+    <div style="width: 287px">
         <i-input :value.sync="v">
             <span slot="prepend">http://</span>
             <span slot="append">
@@ -78,7 +82,14 @@
     </div>
 </template>
 <script>
-    import { iInput, Icon, iButton, iSelect, iOption, InputNumber } from 'iview';
+    import {
+        iInput,
+        Icon,
+        iButton,
+        iSelect,
+        iOption,
+        InputNumber
+    } from 'iview';
 
     export default {
         components: {
@@ -92,7 +103,7 @@
         props: {
 
         },
-        data () {
+        data() {
             return {
                 v: 'hello',
                 t: '',
@@ -108,19 +119,19 @@
 
         },
         methods: {
-            enter () {
+            enter() {
                 console.log(123)
             },
-            iconclick () {
+            iconclick() {
                 console.log('iconclicked')
             },
-            change (val) {
+            change(val) {
                 console.log(val)
             },
-            focus () {
+            focus() {
                 this.$Message.info('focus');
             },
-            blur () {
+            blur() {
                 this.$Message.info('blur');
             }
         }

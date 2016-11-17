@@ -16,25 +16,14 @@
                 @blur="handleBlur">
             <div :class="[prefixCls + '-group-append']" v-if="append" v-show="slotReady" v-el:append><slot name="append"></slot></div>
         </template>
-        <textarea
-            v-else
-            v-el:textarea
-            :class="textareaClasses"
-            :style="textareaStyles"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :rows="rows"
-            :maxlength="maxlength"
-            :readonly="readonly"
-            v-model="value"
-            @keyup.enter="handleEnter"
-            @focus="handleFocus"
-            @blur="handleBlur">
+<textarea v-else v-el:textarea :class="textareaClasses" :style="textareaStyles" :placeholder="placeholder" :disabled="disabled" :rows="rows" :maxlength="maxlength" :readonly="readonly" v-model="value" @keyup.enter="handleEnter" @focus="handleFocus" @blur="handleBlur">
         </textarea>
-    </div>
+</div>
 </template>
 <script>
-    import { oneOf } from '../../utils/assist';
+    import {
+        oneOf
+    } from '../../utils/assist';
     import calcTextareaHeight from '../../utils/calcTextareaHeight';
 
     const prefixCls = 'ivu-input';
@@ -42,8 +31,8 @@
     export default {
         props: {
             type: {
-                validator (value) {
-                    return oneOf(value, ['text', 'textarea', 'password']);
+                validator(value) {
+                    return oneOf(value, ['text', 'textarea', 'password', 'search']);
                 },
                 default: 'text'
             },
@@ -53,7 +42,7 @@
                 twoWay: true
             },
             size: {
-                validator (value) {
+                validator(value) {
                     return oneOf(value, ['small', 'large']);
                 }
             },
@@ -82,20 +71,19 @@
                 default: false
             }
         },
-        data () {
+        data() {
             return {
                 prefixCls: prefixCls,
                 prepend: true,
                 append: true,
                 slotReady: false,
                 textareaStyles: {}
-            }        
+            }
         },
         computed: {
-            wrapClasses () {
+            wrapClasses() {
                 return [
-                    `${prefixCls}-wrapper`,
-                    {
+                    `${prefixCls}-wrapper`, {
                         [`${prefixCls}-wrapper-${this.size}`]: !!this.size,
                         [`${prefixCls}-type`]: this.type,
                         [`${prefixCls}-group`]: this.prepend || this.append,
@@ -103,38 +91,36 @@
                     }
                 ]
             },
-            inputClasses () {
+            inputClasses() {
                 return [
-                    `${prefixCls}`,
-                    {
+                    `${prefixCls}`, {
                         [`${prefixCls}-${this.size}`]: !!this.size,
                         [`${prefixCls}-disabled`]: this.disabled
                     }
                 ]
             },
-            textareaClasses () {
+            textareaClasses() {
                 return [
-                    `${prefixCls}`,
-                    {
+                    `${prefixCls}`, {
                         [`${prefixCls}-disabled`]: this.disabled
                     }
                 ]
             }
         },
         methods: {
-            handleEnter () {
+            handleEnter() {
                 this.$emit('on-enter');
             },
-            handleIconClick () {
+            handleIconClick() {
                 this.$emit('on-click');
             },
-            handleFocus () {
+            handleFocus() {
                 this.$emit('on-focus');
             },
-            handleBlur () {
+            handleBlur() {
                 this.$emit('on-blur');
             },
-            resizeTextarea () {
+            resizeTextarea() {
                 const autosize = this.autosize;
                 if (!autosize || this.type !== 'textarea') {
                     return false;
@@ -147,14 +133,14 @@
             }
         },
         watch: {
-            value (val) {
+            value(val) {
                 this.$nextTick(() => {
                     this.resizeTextarea();
                 });
                 this.$emit('on-change', val);
             }
         },
-        ready () {
+        ready() {
             if (this.type === 'text') {
                 this.prepend = this.$els.prepend.innerHTML !== '';
                 this.append = this.$els.append.innerHTML !== '';

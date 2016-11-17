@@ -4,8 +4,11 @@
     .input;
     &-wrapper{
         display: inline-block;
-        width: 100%;
+        width: @input-width-base;
         position: relative;
+    }
+    &-icon:has(+ &[type="search"]) {
+        left: 0;
     }
     &-icon {
         width: 32px;
@@ -18,7 +21,7 @@
         right: 0;
         z-index: 1;
     }
-
+    
     &-wrapper-large &-icon{
         font-size: 18px;
         height: @input-height-large;

@@ -1,14 +1,15 @@
 .hover(@color: @input-hover-border-color) {
-    border-color: tint(@color, 20%);
+    /*border-color: tint(@color, 20%);*/
 }
 
 .active(@color: @input-hover-border-color) {
-    border-color: tint(@color, 20%);
+    border-color: @color;
     outline: 0;
-    box-shadow: 0 0 0 2px fade(@color, 20%);
+    box-shadow: 0 0 0 2px fade(@color, 15%);
 }
 
 .disabled() {
+    color: #9ba3af;
     background-color: @input-disabled-bg;
     opacity: 1;
     cursor: @cursor-disabled;
@@ -32,11 +33,11 @@
 
 .input() {
     display: inline-block;
-    width: 100%;
+    width: @input-width-base;
     height: @input-height-base;
     line-height: @line-height-base;
     padding: @input-padding-vertical-base @input-padding-horizontal;
-    font-size: @font-size-small;
+    font-size: @font-size-base;
     border: 1px solid @input-border-color;
     border-radius: @border-radius-base;
     color: @input-color;
@@ -66,6 +67,13 @@
         height: auto;
         vertical-align: bottom;
         font-size: @font-size-base;
+    }
+
+    &[type="search"] {
+        width: @input-width-base;
+        height: @input-height-base;
+        line-height: @input-height-base;
+        border-radius: @input-height-base / 2;
     }
 
     // Size
@@ -139,7 +147,7 @@
     &-append
     {
         padding: @input-padding-vertical-base @input-padding-horizontal;
-        font-size: inherit;
+        font-size: @font-size-base;
         font-weight: normal;
         line-height: 1;
         color: @input-color;
@@ -153,9 +161,15 @@
             margin: -(@input-padding-vertical-base + 1) (-@input-padding-horizontal);  // lesshint spaceAroundOperator: false
 
             &-selection {
+                height: 24px;
                 background-color: inherit;
                 margin: -1px;
                 border: 1px solid transparent;
+
+                .ivu-select-selected-value {
+                    height: 24px;
+                    line-height: 24px;
+                }
             }
 
             &-visible .@{css-prefix}select-selection{
@@ -205,6 +219,7 @@
     &-large > &-append
     {
         .input-large();
+        padding: 0 10px;
     }
 
     &-small .@{inputClass},
@@ -212,5 +227,10 @@
     &-small > &-append
     {
         .input-small();
+        padding: 0 10px;
+        
+        .@{css-prefix}-select .@{css-prefix}-select-selection {
+            height: 24px;
+        }
     }
 }
